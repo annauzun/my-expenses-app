@@ -15,7 +15,7 @@ function App() {
   }
   return (
 
-    <div>
+    <div className="mx-auto max-w-screen-md max-h-screen">
       <Header />
       <div className="flex">
       <Chart />

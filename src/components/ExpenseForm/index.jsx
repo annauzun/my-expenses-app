@@ -3,22 +3,27 @@ import { useState } from "react"
 
 
 const unsortedItems = ['Еда', 'Аренда', 'Одежда', 'Обучение', 'Путешествия', 'Развлечения', 'Автомобиль']
-const items = unsortedItems.sort()
+const categories = unsortedItems.sort()
+const payments = ['cash', 'Наличные']
+
 const ExpenseForm = ({addExpense}) => {
 
     const [cost, setCost] = useState('')
-    const [item, setItem] = useState(items[0]) 
+    const [category, setCategory] = useState(categories[0]) 
+    const [payment, setPayment] = useState(payments[0])
 
     const handleClick = event => {
         event.preventDefault()
         const expense = {
             cost,
-            item
+            category,
+            payment
         }
 
         addExpense(expense)
         setCost('')
-        setItem(items[0]) 
+        setCategory(categories[0]) 
+        setPayment(payments[0])
     }
 
     
@@ -37,12 +42,25 @@ const ExpenseForm = ({addExpense}) => {
                 <div className="grid grid-cols-3 gap-y-4">
                     <label className="col-span-1">Категория</label>
                     <select 
-                        value={item} 
-                        onChange={(event) => setItem(event.target.value)}
+                        value={category} 
+                        onChange={(event) => setCategory(event.target.value)}
                         className="col-span-2 border border-solid border-gray-400 rounded">
-                        {items.map(item => {
+                        {categories.map(category => {
                             return (
-                                <option key={item}>{item}</option>
+                                <option key={category}>{category}</option>
+                            )
+                        })}
+                    </select>
+                </div>
+                <div className="grid grid-cols-3 gap-y-4">
+                    <label className="col-span-1">Оплата</label>
+                    <select 
+                        value={payment} 
+                        onChange={(event) => setPayment(event.target.value)}
+                        className="col-span-2 border border-solid border-gray-400 rounded">
+                        {payments.map(payment => {
+                            return (
+                                <option key={payment}>{payment}</option>
                             )
                         })}
                     </select>
