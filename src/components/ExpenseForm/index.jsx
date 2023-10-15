@@ -1,10 +1,9 @@
 import Button from "components/Button"
 import { useState } from "react"
 
-
 const unsortedItems = ['Еда', 'Аренда', 'Одежда', 'Обучение', 'Путешествия', 'Развлечения', 'Автомобиль']
 const categories = unsortedItems.sort()
-const payments = ['cash', 'Наличные']
+const payments = ['Наличные', 'Карта']
 
 const ExpenseForm = ({addExpense}) => {
 
@@ -29,7 +28,7 @@ const ExpenseForm = ({addExpense}) => {
     
     return (
         <div>
-            <form className="max-w-sm mx-10 my-10 gap-y-4 flex flex-col">
+            <form className="max-w-sm mx-10 mt-2 mb-10 gap-y-4 flex flex-col">
                 <div className="grid grid-cols-3 gap-y-4">
                     <label className="col-span-1">Сумма</label>
                     <input 
@@ -70,5 +69,5 @@ const ExpenseForm = ({addExpense}) => {
         </div>
     )
 }
-
+export {categories}
 export default ExpenseForm
