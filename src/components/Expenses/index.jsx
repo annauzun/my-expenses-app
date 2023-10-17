@@ -25,9 +25,9 @@ const Expenses = () => {
       <ExpenseForm addExpense={addExpense} />
       <p className="text-lg bg-slate-200 h-8 mx-10 my-5 border border-solid border-transparent rounded-3xl px-4">Всего: {sum}  ₽</p>
       </div>
-    <div className="my-4 bg-slate-600">
+    <div className="my-4 bg-slate-600/25">
         {expenses.length === 0 && (
-          <div className="py-10 flex flex-col items-center justify-center text-gray-400 text-4xl font-thin text-center">
+          <div className="py-10 flex flex-col items-center justify-center text-gray-600 text-4xl font-thin text-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
