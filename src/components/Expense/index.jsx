@@ -11,9 +11,7 @@ const Expense = (props) => {
           <p className="text-lg text-gray-700">{expense.category}</p>
           <p className="text-sm text-gray-700">{expense.payment}</p>
         </div>
-        <p className="text-lg text-gray-700">
-          - {expense.cost} ₽
-        </p>
+        <p className="text-lg text-gray-700">- {expense.cost} ₽</p>
       </div>
     </div>
   );
