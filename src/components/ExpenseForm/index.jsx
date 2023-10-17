@@ -33,7 +33,7 @@ const ExpenseForm = ({addExpense}) => {
                     <label className="col-span-1">Сумма</label>
                     <input 
                         onChange={(event) => setCost(event.target.value)}
-                        value={cost} 
+                        
                         name="cost" 
                         type="number" 
                         className="col-span-2 border border-solid border-gray-400 rounded"/>

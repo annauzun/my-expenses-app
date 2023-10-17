@@ -15,6 +15,17 @@ function App() {
     setExpenses(newExpenses)
   }
 console.log(expenses)
+
+let total_sum = 0 
+expenses.forEach((function(expense){ 
+   
+    total_sum += parseInt(expense.cost)
+    return total_sum 
+  })) 
+  console.log(total_sum) 
+
+
+
   return (
 
     <div className="mx-auto max-w-screen-md max-h-screen justify-center">
