@@ -26,10 +26,10 @@ const Chart = () => {
           data={data}
           cx={120}
           cy={150}
-          innerRadius={60}
-          outerRadius={80}
+          innerRadius={0}
+          outerRadius={100}
           fill="#8884d8"
-          paddingAngle={5}
+          paddingAngle={1}
           dataKey="value"
         >
           {data.map((entry, index) => (

@@ -13,28 +13,6 @@ const Expenses = () => {
   };
   console.log(expenses);
 
-  /*способы группировки по методу оплаты
-  1.
-  const pn = groupBy(expenses, "payment");
-  console.log(pn);
-
-  2.
-  var result = Object.entries(pn)
-  console.log(Object.values(pn))
-  console.log(result)
-
-  3.
-  const usersByColor = expenses.reduce((acc, value) => {
-    if (!acc[value.payment]) {
-      acc[value.payment] = [];
-    }
-   
-    acc[value.payment].push(value);
-   
-    return acc;
-  }, {})
-  console.log(usersByColor)*/
-
   let sum = 0;
   expenses.forEach(function (expense) {
     sum += parseInt(expense.cost);
@@ -50,7 +28,7 @@ const Expenses = () => {
           Всего: {sum} ₽
         </p>
         <p className="text-lg bg-slate-200 h-8 mx-10 my-5 border border-solid border-transparent rounded-3xl px-4">
-          =</p>
+            </p>
       </div>
       <div className="my-4 bg-slate-600/25">
         {expenses.length === 0 && (
@@ -89,3 +67,32 @@ const Expenses = () => {
 };
 
 export default Expenses;
+
+
+
+
+
+
+  /*способы группировки по методу оплаты
+ 
+  const pn = groupBy(expenses, "payment");
+  console.log(pn);
+
+  
+  Object.entries(pn).forEach(([key, value]) => console.log(`${key}: ${value}`))
+  
+  
+
+
+  
+  const usersByColor = expenses.reduce((acc, value) => {
+    if (!acc[value.payment]) {
+      acc[value.payment] = [];
+    }
+   
+    acc[value.payment].push(value);
+   
+    return acc;
+  }, {})
+  console.log(usersByColor)
+  */
