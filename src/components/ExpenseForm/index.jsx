@@ -34,39 +34,41 @@ const ExpenseForm = ({ addExpense }) => {
 
   return (
     <div>
-      <form className="max-w-sm mx-10 mt-5 gap-y-4 flex flex-col">
-        <div className="grid grid-cols-3 gap-y-4">
-          <label className="col-span-1">Сумма</label>
-          <input
-            onChange={(event) => setCost(event.target.value)}
-            name="cost"
-            type="number"
-            className="col-span-2 border border-solid border-gray-400 rounded"
-          />
-        </div>
-        <div className="grid grid-cols-3 gap-y-4">
-          <label className="col-span-1">Категория</label>
-          <select
-            value={category}
-            onChange={(event) => setCategory(event.target.value)}
-            className="col-span-2 border border-solid border-gray-400 rounded"
-          >
-            {categories.map((category) => {
-              return <option key={category}>{category}</option>;
-            })}
-          </select>
-        </div>
-        <div className="grid grid-cols-3 gap-y-4">
-          <label className="col-span-1">Оплата</label>
-          <select
-            value={payment}
-            onChange={(event) => setPayment(event.target.value)}
-            className="col-span-2 border border-solid border-gray-400 rounded"
-          >
-            {payments.map((payment) => {
-              return <option key={payment}>{payment}</option>;
-            })}
-          </select>
+      <form className="flex flex-wrap justify-between items-center">
+        <div className="max-w-sm mx-10 mt-5 gap-y-4 flex flex-col">
+          <div className="grid grid-cols-3 gap-y-4">
+            <label className="col-span-1">Сумма</label>
+            <input
+              onChange={(event) => setCost(event.target.value)}
+              name="cost"
+              type="number"
+              className="col-span-2 border border-solid border-gray-400 rounded"
+            />
+          </div>
+          <div className="grid grid-cols-3 gap-y-4">
+            <label className="col-span-1">Категория</label>
+            <select
+              value={category}
+              onChange={(event) => setCategory(event.target.value)}
+              className="col-span-2 border border-solid border-gray-400 rounded"
+            >
+              {categories.map((category) => {
+                return <option key={category}>{category}</option>;
+              })}
+            </select>
+          </div>
+          <div className="grid grid-cols-3 gap-y-4">
+            <label className="col-span-1">Оплата</label>
+            <select
+              value={payment}
+              onChange={(event) => setPayment(event.target.value)}
+              className="col-span-2 border border-solid border-gray-400 rounded"
+            >
+              {payments.map((payment) => {
+                return <option key={payment}>{payment}</option>;
+              })}
+            </select>
+          </div>
         </div>
         <Button
           title="Добавить в расходы"
@@ -78,4 +80,5 @@ const ExpenseForm = ({ addExpense }) => {
   );
 };
 export { categories };
+export { payments };
 export default ExpenseForm;

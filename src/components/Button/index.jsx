@@ -3,7 +3,7 @@ const Button = (props) => {
 
   return (
     <button
-      className="mx-10 border border-solid border-transparent rounded-3xl bg-slate-200 text-lg p-2 transition-all ease-out duration-500 hover:border-slate-500 hover:scale-x-105 "
+      className="mx-20 h-full border border-solid border-slate-500 rounded bg-slate-200 text-lg p-2 transition-all ease-out duration-500 hover:scale-105"
       onClick={(event) => handleClick(event)}
     >
       {title}

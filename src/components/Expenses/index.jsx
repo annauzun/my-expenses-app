@@ -1,8 +1,8 @@
 import ExpenseForm from "components/ExpenseForm";
 import Expense from "components/Expense";
 import { useState } from "react";
-import groupBy from "lodash/groupBy";
 
+ 
 const Expenses = () => {
   const [expenses, setExpenses] = useState([]);
 
@@ -18,18 +18,13 @@ const Expenses = () => {
     sum += parseInt(expense.cost);
     return sum;
   });
-  console.log(sum);
+  console.log(sum); 
+ 
 
   return (
-    <div className="bg-green-200/25">
-      <div className="flex flex-wrap justify-between">
-        <ExpenseForm addExpense={addExpense} />
-        <p className="text-lg bg-slate-200 h-8 mx-10 my-5 border border-solid border-transparent rounded-3xl px-4">
-          Всего: {sum} ₽
-        </p>
-        <p className="text-lg bg-slate-200 h-8 mx-10 my-5 border border-solid border-transparent rounded-3xl px-4">
-            </p>
-      </div>
+    <div className="bg-yellow-300/25">
+      <ExpenseForm addExpense={addExpense} />
+       
       <div className="my-4 bg-slate-600/25">
         {expenses.length === 0 && (
           <div className="py-10 flex flex-col items-center justify-center text-gray-600 text-4xl font-thin text-center">
@@ -66,33 +61,6 @@ const Expenses = () => {
   );
 };
 
+
+
 export default Expenses;
-
-
-
-
-
-
-  /*способы группировки по методу оплаты
- 
-  const pn = groupBy(expenses, "payment");
-  console.log(pn);
-
-  
-  Object.entries(pn).forEach(([key, value]) => console.log(`${key}: ${value}`))
-  
-  
-
-
-  
-  const usersByColor = expenses.reduce((acc, value) => {
-    if (!acc[value.payment]) {
-      acc[value.payment] = [];
-    }
-   
-    acc[value.payment].push(value);
-   
-    return acc;
-  }, {})
-  console.log(usersByColor)
-  */

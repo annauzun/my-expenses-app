@@ -3,6 +3,7 @@ import Header from "components/Header";
 import Chart from "components/Chart";
 import Filter from "components/Filter";
 import Expenses from "components/Expenses";
+import Footer from "components/Footer";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Filter />
       </div>
       <Expenses />
+      <Footer />
     </div>
   );
 }
