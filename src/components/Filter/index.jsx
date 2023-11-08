@@ -1,8 +1,7 @@
 import { categories } from "components/ExpenseForm";
 import { payments } from "components/ExpenseForm";
 
-import Expenses from "components/Expenses";
-import groupBy from "lodash/groupBy";
+
 
 console.log(categories);
 console.log(payments);
