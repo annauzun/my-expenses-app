@@ -42,6 +42,7 @@ const ExpenseForm = ({ addExpense }) => {
               onChange={(event) => setCost(event.target.value)}
               name="cost"
               type="number"
+              min="0"
               className="col-span-2 border border-solid border-gray-400 rounded"
             />
           </div>
@@ -80,5 +81,4 @@ const ExpenseForm = ({ addExpense }) => {
   );
 };
 export { categories };
-export { payments };
 export default ExpenseForm;
