@@ -25,8 +25,23 @@ function App() {
   });
   console.log(sum);
 
-  const groupByCategory = groupBy(expenses, 'category');
-  console.log(groupByCategory);
+
+  const categoryArrays = Object.values(groupBy(expenses, 'category'))
+  console.log(categoryArrays)
+  categoryArrays.forEach((categoryArray) => {
+    console.log(categoryArray)
+    let eachCategorySum = 0
+    categoryArray.forEach((element) => {
+      console.log(element.category)
+      eachCategorySum += parseInt(element.cost)
+      return eachCategorySum
+    })
+    console.log(eachCategorySum)
+    return categoryArrays
+  })
+
+
+
   
   
   return (
@@ -36,7 +51,7 @@ function App() {
         <div className="w-1/2">
           <Chart />
         </div>
-        
+       
         <div className="w-1/2 flex flex-col items-start justify-center ">
       {categories.map((category) => {
         return (
@@ -45,6 +60,7 @@ function App() {
           </p>
         );
       })}
+      
       
     </div>
       </div>
