@@ -1,5 +1,5 @@
-import Button from "components/Button";
-import Item from "components/Item";
+/*import Button from "components/Button";
+
 import { useState } from "react";
 import {
   expCategories,
@@ -12,7 +12,7 @@ const ReportsPage = () => {
   const [category, setCategory] = useState();
   const [month, setMonth] = useState();
   const [payment, setPayment] = useState();
-  const [items, setItems] = useState([]);
+   
 
   const [filtered, setFiltered] = useState(items);
 
@@ -120,3 +120,4 @@ const ReportsPage = () => {
 };
 
 export default ReportsPage;
+*/
