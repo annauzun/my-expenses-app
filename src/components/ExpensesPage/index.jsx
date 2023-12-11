@@ -1,19 +1,19 @@
 import ExpForm from "components/ExpForm";
 import Item from "components/Item";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { expCategories } from "components/Categories";
 
 const ExpensesPage = () => {
   const [items, setItems] = useState([]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const raw = localStorage.getItem("items");
     raw && setItems(JSON.parse(raw));
   }, []);
 
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(items));
-  }, [items]);
+  }, [items]);*/
 
   const addItem = (item) => {
     const newItems = [...items, item];
