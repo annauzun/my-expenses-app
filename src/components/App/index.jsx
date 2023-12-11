@@ -1,7 +1,7 @@
 import Header from "components/Header";
 import ExpensesPage from "components/ExpensesPage";
 import IncomePage from "components/IncomePage";
-import ReportsPage from "components/ReportsPage";
+//import ReportsPage from "components/ReportsPage";
 import Footer from "components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
