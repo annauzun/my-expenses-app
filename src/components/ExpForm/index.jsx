@@ -1,48 +1,70 @@
 import Button from "components/Button";
 import { useState } from "react";
+import { expCategories, payments } from "components/Categories";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import ru from "date-fns/locale/ru";
+import Modal from "components/Modal";
 
-const unsortedItems = [
-  "Еда",
-  "Аренда",
-  "Одежда",
-  "Обучение",
-  "Путешествия",
-  "Развлечения",
-  "Автомобиль",
-];
-const categories = unsortedItems.sort();
-const payments = ["Наличные", "Карта"];
-
-const ExpenseForm = ({ addExpense }) => {
+const ExpForm = ({ addItem }) => {
   const [cost, setCost] = useState("");
-  const [category, setCategory] = useState(categories[0]);
+  const [category, setCategory] = useState(expCategories[0]);
   const [payment, setPayment] = useState(payments[0]);
+  const [startDate, setStartDate] = useState();
+  let [isOpen, setIsOpen] = useState(false);
 
   const handleClick = (event) => {
     event.preventDefault();
-    const expense = {
-      cost,
-      category,
-      payment,
-    };
 
-    addExpense(expense);
-    setCost("");
-    setCategory(categories[0]);
-    setPayment(payments[0]);
+    if (cost && category && payment && startDate) {
+      const item = {
+        date: startDate,
+        cost: cost,
+        category: category,
+        payment: payment,
+      };
+
+      addItem(item);
+      setCost("");
+      setStartDate();
+      setCategory(expCategories[0]);
+      setPayment(payments[0]);
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+    }
   };
 
   return (
     <div>
-      <form className="flex flex-wrap justify-between items-center">
+      <form
+        className="flex flex-wrap justify-between items-center"
+        onSubmit={handleClick}
+      >
         <div className="max-w-sm mx-10 mt-5 gap-y-4 flex flex-col">
+          <div className="grid grid-cols-3 gap-y-4">
+            <label className="col-span-1">Дата</label>
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              locale={ru}
+              dateFormat="dd.MM.yyyy"
+              className="border border-solid border-gray-400 rounded w-fit"
+            />
+          </div>
+
           <div className="grid grid-cols-3 gap-y-4">
             <label className="col-span-1">Сумма</label>
             <input
-              onChange={(event) => setCost(event.target.value)}
+              onChange={(event) => {
+                const pattern = /^[0-9]{0,12}$/;
+                if (pattern.test(event.target.value)) {
+                  setCost(event.target.value);
+                }
+              }}
               name="cost"
-              type="number"
-              min="0"
+              type="text"
+              value={cost}
               className="col-span-2 border border-solid border-gray-400 rounded"
             />
           </div>
@@ -53,7 +75,7 @@ const ExpenseForm = ({ addExpense }) => {
               onChange={(event) => setCategory(event.target.value)}
               className="col-span-2 border border-solid border-gray-400 rounded"
             >
-              {categories.map((category) => {
+              {expCategories.map((category) => {
                 return <option key={category}>{category}</option>;
               })}
             </select>
@@ -76,9 +98,10 @@ const ExpenseForm = ({ addExpense }) => {
           handleClick={handleClick}
           type="submit"
         />
+        <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
       </form>
     </div>
   );
 };
-export { categories };
-export default ExpenseForm;
+
+export default ExpForm;

@@ -1,9 +1,12 @@
 import Button from "components/Button";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="bg-green-200 text-3xl text-gray-700 flex flex-wrap items-center justify-around gap-6 px-5 py-6">
-      <div>Учет расходов</div>
+    <header className="bg-green-200 text-2xl text-gray-700 flex flex-wrap items-center justify-around gap-6 px-5 py-6">
+      <Link to={"/expenses"}>Учет расходов</Link>
+      <Link to={"/income"}>Учет доходов</Link>
+      <Link to={"/reports"}>Отчеты</Link>
       <Button
         title={
           <svg
