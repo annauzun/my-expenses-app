@@ -87,6 +87,7 @@ const IncomePage = () => {
             <div className="flex flex-wrap items-start gap-2">
               {incCategories.map((incCategory) => (
                 <button
+                key={incCategory}
                   className="shadow-md rounded-lg px-2 py-1 bg-slate-100"
                   onClick={() => categoryFilter(incCategory)}
                 >

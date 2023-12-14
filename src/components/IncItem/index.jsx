@@ -18,12 +18,13 @@ const IncItem = (props) => {
         </div>
         <div className="flex flex-col items-end">
           <p className="text-lg">{item.cost} ₽</p>
-          <a
+          <button
+          key={item.id}
             className="hover:underline cursor-pointer text-sm"
             onClick={() => deleteItem(item.id)}
           >
             Удалить
-          </a>
+          </button>
         </div>
       </div>
     </div>
