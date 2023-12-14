@@ -1,33 +1,108 @@
-import Item from "components/Item";
-import { useState } from "react";
+import IncItem from "components/IncItem";
+import { useState, useEffect } from "react";
 import IncForm from "components/IncForm";
+import { incCategories } from "components/Categories";
+import Chart from "components/Chart";
 
 const IncomePage = () => {
   const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    setFiltered(items);
+  }, [items]);
+
+  useEffect(() => {
+    fetch("https://657636a50febac18d403c5b7.mockapi.io/incItems")
+      .then((response) => response.json())
+      .then((data) => setItems(data));
+  }, []);
+  const [filtered, setFiltered] = useState(items);
+
+  const deleteItem = (id) => {
+    let newItems = [...items].filter((item) => item.id !== id);
+    setItems(newItems);
+  };
+
+  const paymentFilter = (payment) => {
+    if (payment === "all") {
+      setFiltered(items);
+    } else {
+      let newItems = [...items].filter((item) => item.payment === payment);
+      setFiltered(newItems);
+    }
+  };
+
+  const categoryFilter = (incCategory) => {
+    if (incCategory === "all") {
+      setFiltered(items);
+    } else {
+      let newItems = [...items].filter(
+        (item) => item.incCategory === incCategory,
+      );
+      setFiltered(newItems);
+    }
+  };
+
+  let sum = 0;
+  filtered.forEach(function (item) {
+    sum += parseInt(item.cost);
+    return sum;
+  });
 
   const addItem = (item) => {
     const newItems = [...items, item];
     console.log(newItems);
     setItems(newItems);
   };
-  console.log(items);
-
-  let sum = 0;
-  items.forEach(function (item) {
-    sum += parseInt(item.cost);
-    return sum;
-  });
-  console.log(sum);
 
   return (
     <div>
-      <div className="text-2xl text-gray-700 flex flex-wrap items-center justify-center py-6">
-        <div>Общая сумма доходов: {sum} ₽</div>
+      <div className="flex justify-between">
+        <div className="flex flex-col gap-5">
+          <div className="flex flex-col items-start justify-center pl-8 my-5">
+            <p>Сортировать по методу оплаты:</p>
+            <div className="flex items-start gap-2">
+              <button
+                className="shadow-md rounded-lg px-2 py-1 bg-slate-100"
+                onClick={() => paymentFilter("all")}
+              >
+                Все
+              </button>
+              <button
+                className="shadow-md rounded-lg px-2 py-1 bg-slate-100"
+                onClick={() => paymentFilter("Карта")}
+              >
+                Карта
+              </button>
+              <button
+                className="shadow-md rounded-lg px-2 py-1 bg-slate-100"
+                onClick={() => paymentFilter("Наличные")}
+              >
+                Наличные
+              </button>
+            </div>
+          </div>
+          <div className="flex flex-col items-start justify-center pl-8 mb-3">
+            <p>Сортировать по категории доходов:</p>
+            <div className="flex flex-wrap items-start gap-2">
+              {incCategories.map((incCategory) => (
+                <button
+                  className="shadow-md rounded-lg px-2 py-1 bg-slate-100"
+                  onClick={() => categoryFilter(incCategory)}
+                >
+                  {incCategory}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="w-1/2">
+          <Chart />
+        </div>
       </div>
-
-      <div className="bg-purple-200/25">
-        <IncForm addItem={addItem} />
-
+      <div className="mb-5 text-center text-xl">Итого доходов - {sum} ₽</div>
+      <div className="bg-purple-300/25">
+        <IncForm addItem={addItem} itemCategories={incCategories} />
         <div className="my-4 bg-slate-600/25">
           {items.length === 0 && (
             <div className="py-10 flex flex-col items-center justify-center text-gray-600 text-4xl font-thin text-center">
@@ -50,8 +125,15 @@ const IncomePage = () => {
             </div>
           )}
           {items.length > 0 &&
-            items.map((item) => {
-              return <Item key={item.id} item={item} addItem={addItem} />;
+            filtered.map((item) => {
+              return (
+                <IncItem
+                  key={item.id}
+                  item={item}
+                  addItem={addItem}
+                  deleteItem={deleteItem}
+                />
+              );
             })}
         </div>
       </div>

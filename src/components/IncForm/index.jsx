@@ -11,6 +11,7 @@ const IncForm = ({ addItem }) => {
   const [category, setCategory] = useState(incCategories[2]);
   const [payment, setPayment] = useState(payments[0]);
   const [startDate, setStartDate] = useState();
+  const [id, setId] = useState();
   let [isOpen, setIsOpen] = useState(false);
 
   const handleClick = (event) => {
@@ -18,13 +19,15 @@ const IncForm = ({ addItem }) => {
 
     if (cost && category && payment && startDate) {
       const item = {
+        id,
         date: startDate,
         cost: cost,
-        category: category,
+        incCategory: category,
         payment: payment,
       };
 
       addItem(item);
+      setId();
       setCost("");
       setStartDate();
       setCategory(incCategories[2]);
@@ -38,7 +41,7 @@ const IncForm = ({ addItem }) => {
   return (
     <div>
       <form
-        className="flex flex-wrap justify-between items-center"
+        className="flex flex-wrap justify-between items-center px-10"
         onSubmit={handleClick}
       >
         <div className="max-w-sm mx-10 mt-5 gap-y-4 flex flex-col">

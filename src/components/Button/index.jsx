@@ -1,9 +1,10 @@
 const Button = (props) => {
-  const { title, handleClick } = props;
+  const { title, handleClick, type } = props;
 
   return (
     <button
-      className="mr-10 h-full border border-solid border-slate-500 rounded bg-slate-200 text-lg p-2 transition-all ease-out duration-500 hover:scale-105"
+      className="h-full border border-solid rounded bg-green-400 text-md font-semibold text-black p-2 transition-all ease-out duration-500 hover:bg-green-500 hover:shadow-md"
+      type={type}
       onClick={(event) => handleClick(event)}
     >
       {title}
