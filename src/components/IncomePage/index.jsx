@@ -101,7 +101,7 @@ const IncomePage = () => {
             <p>Сортировать доходы по:</p>
             <div className="flex items-center w-3/4 justify-between">
               <button
-                className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-green-200 hover:bg-green-300"
+                className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-purple-200 hover:bg-green-300"
                 onClick={() => paymentFilter("all")}
               >
                 Все
@@ -119,7 +119,7 @@ const IncomePage = () => {
                 >
                   <button
                     key={item.payment}
-                    className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-green-200 hover:bg-green-300"
+                    className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-purple-200 hover:bg-green-300"
                     onClick={() => paymentFilter(item.payment)}
                   >
                     {item.payment}
@@ -139,7 +139,7 @@ const IncomePage = () => {
                 >
                   <button
                     key={item.incCategory}
-                    className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-green-200 hover:bg-green-300"
+                    className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-purple-200 hover:bg-green-300"
                     onClick={() => categoryFilter(item.incCategory)}
                   >
                     {item.incCategory}
@@ -159,7 +159,7 @@ const IncomePage = () => {
                 cy="50%"
                 labelLine={true}
                 label={({ incCategory, cost }) => `${incCategory}: ${cost} ₽`}
-                outerRadius={60}
+                outerRadius={75}
                 fill="#8884d8"
                 dataKey="cost"
               >

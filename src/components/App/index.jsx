@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <BrowserRouter>
-      <div className="mx-auto max-w-screen-md max-h-screen justify-center">
+      <div className="mx-auto max-w-screen-lg max-h-screen justify-center">
         <Header />
         <Routes>
           <Route path="/expenses" element={<ExpensesPage />} />

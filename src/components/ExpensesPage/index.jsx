@@ -159,7 +159,7 @@ const ExpensesPage = () => {
                 cy="50%"
                 labelLine={true}
                 label={({ expCategory, cost }) => `${expCategory}: ${cost} ₽`}
-                outerRadius={60}
+                outerRadius={75}
                 fill="#8884d8"
                 dataKey="cost"
               >
@@ -175,7 +175,7 @@ const ExpensesPage = () => {
         </div>
       </div>
       <div className="mb-5 text-center text-xl">Итого расходов - {sum} ₽</div>
-      <div className="bg-yellow-300/25">
+      <div className="bg-green-100">
         <ExpForm addItem={addItem} itemCategories={expCategories} />
         <div className="my-4 bg-slate-600/25">
           {filtered.length === 0 && (
