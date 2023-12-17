@@ -52,6 +52,7 @@ const IncForm = ({ addItem }) => {
               onChange={(date) => setStartDate(date)}
               locale={ru}
               dateFormat="dd.MM.yyyy"
+              placeholderText="Введите дату"
               className="border border-solid border-gray-400 rounded w-fit"
             />
           </div>
@@ -67,6 +68,7 @@ const IncForm = ({ addItem }) => {
               }}
               name="cost"
               type="text"
+              placeholder="Введите сумму"
               value={cost}
               className="col-span-2 border border-solid border-gray-400 rounded"
             />

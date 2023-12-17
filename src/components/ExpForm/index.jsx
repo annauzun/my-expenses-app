@@ -51,6 +51,7 @@ const ExpForm = ({ addItem }) => {
               selected={startDate}
               onChange={(date) => setStartDate(date)}
               locale={ru}
+              placeholderText="Введите дату"
               dateFormat="dd.MM.yyyy"
               className="border border-solid border-gray-400 rounded w-fit"
             />
@@ -67,6 +68,7 @@ const ExpForm = ({ addItem }) => {
               }}
               name="cost"
               type="text"
+              placeholder="Введите сумму"
               value={cost}
               className="col-span-2 border border-solid border-gray-400 rounded"
             />

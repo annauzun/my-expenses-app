@@ -2,10 +2,11 @@ import IncItem from "components/IncItem";
 import { useState, useEffect } from "react";
 import IncForm from "components/IncForm";
 import { incCategories } from "components/Categories";
-import Chart from "components/Chart";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 const IncomePage = () => {
   const [items, setItems] = useState([]);
+  const [filtered, setFiltered] = useState(items);
 
   useEffect(() => {
     setFiltered(items);
@@ -16,7 +17,12 @@ const IncomePage = () => {
       .then((response) => response.json())
       .then((data) => setItems(data));
   }, []);
-  const [filtered, setFiltered] = useState(items);
+
+  const addItem = (item) => {
+    const newItems = [...items, item];
+    console.log(newItems);
+    setItems(newItems);
+  };
 
   const deleteItem = (id) => {
     let newItems = [...items].filter((item) => item.id !== id);
@@ -44,68 +50,135 @@ const IncomePage = () => {
   };
 
   let sum = 0;
-  filtered.forEach(function (item) {
+  items.forEach(function (item) {
     sum += parseInt(item.cost);
     return sum;
   });
 
-  const addItem = (item) => {
-    const newItems = [...items, item];
-    console.log(newItems);
-    setItems(newItems);
-  };
+  var paymentItems = items.reduce((acc, cur) => {
+    const existType = acc.find((a) => a.payment === cur.payment);
+    if (existType) {
+      existType.cost += +cur.cost;
+      return acc;
+    }
+
+    acc.push({
+      payment: cur.payment,
+      cost: +cur.cost,
+    });
+    return acc;
+  }, []);
+
+  var categoryItems = items.reduce((acc, cur) => {
+    const existType = acc.find((a) => a.incCategory === cur.incCategory);
+    if (existType) {
+      existType.cost += +cur.cost;
+      return acc;
+    }
+
+    acc.push({
+      incCategory: cur.incCategory,
+      cost: +cur.cost,
+    });
+    return acc;
+  }, []);
+
+  const COLORS = [
+    "#7571d2 ",
+    "#5686e7 ",
+    "#65c1d6 ",
+    "#5ebb81 ",
+    "#8ad542 ",
+    "#ff7070   ",
+    "#ffb525 ",
+  ];
 
   return (
     <div>
-      <div className="flex justify-between">
-        <div className="flex flex-col gap-5">
-          <div className="flex flex-col items-start justify-center pl-8 my-5">
-            <p>Сортировать по методу оплаты:</p>
-            <div className="flex items-start gap-2">
+      <div className="flex">
+        <div className="flex flex-col justify-center pl-8 my-3 w-2/5 gap-2">
+          <div>
+            <p>Сортировать доходы по:</p>
+            <div className="flex items-center w-3/4 justify-between">
               <button
-                className="shadow-md rounded-lg px-2 py-1 bg-slate-100"
+                className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-green-200 hover:bg-green-300"
                 onClick={() => paymentFilter("all")}
               >
                 Все
               </button>
-              <button
-                className="shadow-md rounded-lg px-2 py-1 bg-slate-100"
-                onClick={() => paymentFilter("Карта")}
-              >
-                Карта
-              </button>
-              <button
-                className="shadow-md rounded-lg px-2 py-1 bg-slate-100"
-                onClick={() => paymentFilter("Наличные")}
-              >
-                Наличные
-              </button>
+              <div className="text-md">{sum} ₽</div>
             </div>
           </div>
-          <div className="flex flex-col items-start justify-center pl-8 mb-3">
-            <p>Сортировать по категории доходов:</p>
-            <div className="flex flex-wrap items-start gap-2">
-              {incCategories.map((incCategory) => (
-                <button
-                key={incCategory}
-                  className="shadow-md rounded-lg px-2 py-1 bg-slate-100"
-                  onClick={() => categoryFilter(incCategory)}
+          <div>
+            <p>методу оплаты:</p>
+            <div className="flex flex-col items-start gap-2 justify-between w-3/4">
+              {paymentItems.map((item) => (
+                <li
+                  key={item.payment}
+                  className="flex items-center w-full justify-between"
                 >
-                  {incCategory}
-                </button>
+                  <button
+                    key={item.payment}
+                    className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-green-200 hover:bg-green-300"
+                    onClick={() => paymentFilter(item.payment)}
+                  >
+                    {item.payment}
+                  </button>
+                  <div className="text-md">{item.cost} ₽</div>
+                </li>
+              ))}
+            </div>
+          </div>
+          <div>
+            <p>по категории:</p>
+            <div className="flex flex-col items-start gap-2 justify-between w-3/4">
+              {categoryItems.map((item) => (
+                <li
+                  key={item.incCategory}
+                  className="flex items-center w-full justify-between"
+                >
+                  <button
+                    key={item.incCategory}
+                    className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-green-200 hover:bg-green-300"
+                    onClick={() => categoryFilter(item.incCategory)}
+                  >
+                    {item.incCategory}
+                  </button>
+                  <div className="text-md">{item.cost} ₽</div>
+                </li>
               ))}
             </div>
           </div>
         </div>
-        <div className="w-1/2">
-          <Chart />
+        <div className="w-3/5">
+          <ResponsiveContainer width="100%" height="80%">
+            <PieChart width={400} height={400}>
+              <Pie
+                data={categoryItems}
+                cx="40%"
+                cy="50%"
+                labelLine={true}
+                label={({ incCategory, cost }) => `${incCategory}: ${cost} ₽`}
+                outerRadius={60}
+                fill="#8884d8"
+                dataKey="cost"
+              >
+                {categoryItems.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
         </div>
       </div>
       <div className="mb-5 text-center text-xl">Итого доходов - {sum} ₽</div>
       <div className="bg-purple-300/25">
         <IncForm addItem={addItem} itemCategories={incCategories} />
         <div className="my-4 bg-slate-600/25">
-          {items.length === 0 && (
+          {filtered.length === 0 && (
             <div className="py-10 flex flex-col items-center justify-center text-gray-600 text-4xl font-thin text-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -125,7 +198,7 @@ const IncomePage = () => {
               <p className="flex m-4 px-6">Выберите категорию доходов</p>
             </div>
           )}
-          {items.length > 0 &&
+          {filtered.length > 0 &&
             filtered.map((item) => {
               return (
                 <IncItem

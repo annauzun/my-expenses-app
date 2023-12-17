@@ -19,7 +19,7 @@ const Item = (props) => {
         <div className="flex flex-col items-end">
           <p className="text-lg">{item.cost} ₽</p>
           <button
-          key={item.id}
+            key={item.id}
             className="hover:underline cursor-pointer text-sm"
             onClick={() => deleteItem(item.id)}
           >
