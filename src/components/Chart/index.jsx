@@ -1,4 +1,3 @@
-
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
 const COLORS = [
@@ -10,32 +9,27 @@ const COLORS = [
   "#ff7070   ",
   "#ffb525 ",
 ];
-const Chart = ({categoryItems}) => {
-
-
+const Chart = ({ categoryItems }) => {
   return (
-  <ResponsiveContainer width="100%" height="80%">
-            <PieChart width={400} height={400}>
-              <Pie
-                data={categoryItems}
-                cx="50%"
-                cy="50%"
-                labelLine={true}
-                label={({ itemCategory, cost }) => `${itemCategory}: ${cost} ₽`}
-                outerRadius={75}
-                fill="#8884d8"
-                dataKey="cost"
-              >
-                {categoryItems.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
-                ))}
-              </Pie>
-            </PieChart>
-          </ResponsiveContainer>
-  )
-  }
-  
-export default Chart
+    <ResponsiveContainer width="100%" height="80%">
+      <PieChart width={400} height={400}>
+        <Pie
+          data={categoryItems}
+          cx="50%"
+          cy="50%"
+          labelLine={true}
+          label={({ itemCategory, cost }) => `${itemCategory}: ${cost} ₽`}
+          outerRadius={75}
+          fill="#8884d8"
+          dataKey="cost"
+        >
+          {categoryItems.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+      </PieChart>
+    </ResponsiveContainer>
+  );
+};
+
+export default Chart;

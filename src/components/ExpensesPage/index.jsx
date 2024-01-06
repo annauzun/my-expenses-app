@@ -4,9 +4,8 @@ import { useState, useEffect } from "react";
 import Chart from "components/Chart";
 import Empty from "components/Empty";
 import { expCategories } from "categories";
-import Loader from "components/Loader"
+import Loader from "components/Loader";
 import FilteredItems from "components/FilteredItems";
-
 
 const ExpensesPage = () => {
   const [items, setItems] = useState([]);
@@ -87,25 +86,25 @@ const ExpensesPage = () => {
     return acc;
   }, []);
 
-  if (items.length === 0) return (
-    <div className="mt-20 text-center">
-      <Loader />
+  if (items.length === 0)
+    return (
+      <div className="mt-20 text-center">
+        <Loader />
       </div>
-  )
+    );
 
   return (
     <div>
       <div className="flex">
-        <FilteredItems 
-        paymentFilter={paymentFilter} 
-        paymentItems={paymentItems}
-        categoryFilter={categoryFilter}
-        categoryItems={categoryItems}
-        sum={sum}
-        
+        <FilteredItems
+          paymentFilter={paymentFilter}
+          paymentItems={paymentItems}
+          categoryFilter={categoryFilter}
+          categoryItems={categoryItems}
+          sum={sum}
         />
         <div className="w-3/5">
-          <Chart categoryItems={categoryItems}/>
+          <Chart categoryItems={categoryItems} />
         </div>
       </div>
       <div className="mb-5 text-center text-xl">Итого расходов - {sum} ₽</div>

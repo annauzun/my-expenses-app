@@ -7,7 +7,7 @@ import ru from "date-fns/locale/ru";
 import Modal from "components/Modal";
 
 const Form = (props) => {
-    const { addItem, itemCategories } = props
+  const { addItem, itemCategories } = props;
   const [cost, setCost] = useState("");
   const [category, setCategory] = useState(itemCategories[2]);
   const [payment, setPayment] = useState(payments[0]);
@@ -99,11 +99,7 @@ const Form = (props) => {
             </select>
           </div>
         </div>
-        <Button
-          title="Добавить"
-          handleClick={handleClick}
-          type="submit"
-        />
+        <Button title="Добавить" handleClick={handleClick} type="submit" />
         <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
       </form>
     </div>
