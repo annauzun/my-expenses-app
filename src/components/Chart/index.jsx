@@ -1,36 +1,41 @@
-import React, { PureComponent } from "react";
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
 
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+
+const COLORS = [
+  "#7571d2 ",
+  "#5686e7 ",
+  "#65c1d6 ",
+  "#5ebb81 ",
+  "#8ad542 ",
+  "#ff7070   ",
+  "#ffb525 ",
 ];
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const Chart = ({categoryItems}) => {
 
-export default class Example extends PureComponent {
-  static demoUrl =
-    "https://codesandbox.io/s/pie-chart-with-padding-angle-7ux0o";
 
-  render() {
-    return (
-      <PieChart width={800} height={400} onMouseEnter={this.onPieEnter}>
-        <Pie
-          data={data}
-          cx={120}
-          cy={200}
-          innerRadius={0}
-          outerRadius={80}
-          fill="#8884d8"
-          paddingAngle={1}
-          dataKey="value"
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-      </PieChart>
-    );
+  return (
+  <ResponsiveContainer width="100%" height="80%">
+            <PieChart width={400} height={400}>
+              <Pie
+                data={categoryItems}
+                cx="50%"
+                cy="50%"
+                labelLine={true}
+                label={({ itemCategory, cost }) => `${itemCategory}: ${cost} ₽`}
+                outerRadius={75}
+                fill="#8884d8"
+                dataKey="cost"
+              >
+                {categoryItems.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+  )
   }
-}
+  
+export default Chart

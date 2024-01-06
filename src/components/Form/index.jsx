@@ -1,14 +1,15 @@
 import Button from "components/Button";
 import { useState } from "react";
-import { incCategories, payments } from "components/Categories";
+import { payments } from "categories";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ru from "date-fns/locale/ru";
 import Modal from "components/Modal";
 
-const IncForm = ({ addItem }) => {
+const Form = (props) => {
+    const { addItem, itemCategories } = props
   const [cost, setCost] = useState("");
-  const [category, setCategory] = useState(incCategories[2]);
+  const [category, setCategory] = useState(itemCategories[2]);
   const [payment, setPayment] = useState(payments[0]);
   const [startDate, setStartDate] = useState();
   const [id, setId] = useState();
@@ -22,7 +23,7 @@ const IncForm = ({ addItem }) => {
         id,
         date: startDate,
         cost: cost,
-        incCategory: category,
+        itemCategory: category,
         payment: payment,
       };
 
@@ -30,7 +31,7 @@ const IncForm = ({ addItem }) => {
       setId();
       setCost("");
       setStartDate();
-      setCategory(incCategories[2]);
+      setCategory(itemCategories[2]);
       setPayment(payments[0]);
       setIsOpen(false);
     } else {
@@ -80,7 +81,7 @@ const IncForm = ({ addItem }) => {
               onChange={(event) => setCategory(event.target.value)}
               className="col-span-2 border border-solid border-gray-400 rounded"
             >
-              {incCategories.map((category) => {
+              {itemCategories.map((category) => {
                 return <option key={category}>{category}</option>;
               })}
             </select>
@@ -99,7 +100,7 @@ const IncForm = ({ addItem }) => {
           </div>
         </div>
         <Button
-          title="Добавить в доходы"
+          title="Добавить"
           handleClick={handleClick}
           type="submit"
         />
@@ -109,4 +110,4 @@ const IncForm = ({ addItem }) => {
   );
 };
 
-export default IncForm;
+export default Form;
