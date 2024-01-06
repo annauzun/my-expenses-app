@@ -10,14 +10,13 @@ import Loader from "components/Loader"
 const IncomePage = () => {
   const [items, setItems] = useState([]);
   const [filtered, setFiltered] = useState(items);
-  let url = "https://657636a50febac18d403c5b7.mockapi.io/incItems"
 
   useEffect(() => {
     setFiltered(items);
   }, [items]);
 
   useEffect(() => {
-    fetch(url)
+    fetch("https://657636a50febac18d403c5b7.mockapi.io/incItems")
       .then((response) => response.json())
       .then((data) => setItems(data));
   }, []);
