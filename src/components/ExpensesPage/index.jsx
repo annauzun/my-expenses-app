@@ -110,7 +110,7 @@ const ExpensesPage = () => {
       <div className="mb-5 text-center text-xl">Итого расходов - {sum} ₽</div>
       <div className="bg-green-100">
         <Form addItem={addItem} itemCategories={expCategories} />
-        <div className="my-4 bg-slate-600/25">
+        <div className="my-4 bg-slate-400/25">
           {filtered.length === 0 && (
             <Empty title="Выберите категорию расходов" />
           )}

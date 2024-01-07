@@ -1,17 +1,13 @@
 const FilteredItems = (props) => {
-  const {paymentFilter,
-  paymentItems,
-  categoryFilter,
-  categoryItems,
-  sum,
-} = props
+  const { paymentFilter, paymentItems, categoryFilter, categoryItems, sum } =
+    props;
   return (
     <div className="flex flex-col justify-center pl-8 my-3 w-2/5 gap-2">
       <div>
         <p>Сортировать расходы по:</p>
         <div className="flex items-center w-3/4 justify-between">
           <button
-            className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-green-200 focus:bg-green-400"
+            className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-sky-200 focus:bg-sky-400"
             onClick={() => paymentFilter("all")}
           >
             Все
@@ -29,7 +25,7 @@ const FilteredItems = (props) => {
             >
               <button
                 key={item.payment}
-                className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-green-200 focus:bg-green-400"
+                className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-sky-200 focus:bg-sky-400"
                 onClick={() => paymentFilter(item.payment)}
               >
                 {item.payment}
@@ -49,7 +45,7 @@ const FilteredItems = (props) => {
             >
               <button
                 key={item.itemCategory}
-                className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-green-200 focus:bg-green-400"
+                className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-sky-200 focus:bg-sky-400"
                 onClick={() => categoryFilter(item.itemCategory)}
               >
                 {item.itemCategory}
