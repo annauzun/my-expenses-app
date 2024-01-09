@@ -3,9 +3,12 @@ import Item from "components/Item";
 import { useState, useEffect } from "react";
 import Chart from "components/Chart";
 import Empty from "components/Empty";
-import { expCategories } from "categories";
+import { expCategories, months } from "categories";
 import Loader from "components/Loader";
 import FilteredItems from "components/FilteredItems";
+import { getMonth } from "date-fns";
+import { format } from "date-fns";
+import { ru } from "date-fns/locale";
 
 const ExpensesPage = () => {
   const [items, setItems] = useState([]);
@@ -41,6 +44,15 @@ const ExpensesPage = () => {
     }
   };
 
+  const dateFilter = (date) => {
+    if (date === "all") {
+      setFiltered(items);
+    } else {
+      let newItems = [...items].filter((item) => item.date === date);
+      setFiltered(newItems);
+    }
+  };
+
   const categoryFilter = (itemCategory) => {
     if (itemCategory === "all") {
       setFiltered(items);
@@ -60,6 +72,7 @@ const ExpensesPage = () => {
 
   var paymentItems = items.reduce((acc, cur) => {
     const existType = acc.find((a) => a.payment === cur.payment);
+
     if (existType) {
       existType.cost += +cur.cost;
       return acc;
@@ -72,8 +85,25 @@ const ExpensesPage = () => {
     return acc;
   }, []);
 
+  var dateItems = items.reduce((acc, cur) => {
+    const existType = acc.find((a) => a.x === cur.x);
+    console.log(existType);
+    if (existType) {
+      existType.cost += +cur.cost;
+      return acc;
+    }
+
+    acc.push({
+      month: cur.date,
+      cost: +cur.cost,
+    });
+    return acc;
+  }, []);
+  console.log(dateItems);
+
   var categoryItems = items.reduce((acc, cur) => {
     const existType = acc.find((a) => a.itemCategory === cur.itemCategory);
+    console.log(existType);
     if (existType) {
       existType.cost += +cur.cost;
       return acc;
@@ -85,7 +115,7 @@ const ExpensesPage = () => {
     });
     return acc;
   }, []);
-
+  console.log(categoryItems);
   if (items.length === 0)
     return (
       <div className="mt-20 text-center">
@@ -101,6 +131,8 @@ const ExpensesPage = () => {
           paymentItems={paymentItems}
           categoryFilter={categoryFilter}
           categoryItems={categoryItems}
+          dateFilter={dateFilter}
+          dateItems={dateItems}
           sum={sum}
         />
         <div className="w-3/5">

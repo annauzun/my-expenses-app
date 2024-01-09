@@ -1,20 +1,28 @@
+import Button from "components/Button";
+
 const FilteredItems = (props) => {
-  const { paymentFilter, paymentItems, categoryFilter, categoryItems, sum } =
-    props;
+  const {
+    paymentFilter,
+    paymentItems,
+    categoryFilter,
+    categoryItems,
+    dateItems,
+    dateFilter,
+    sum,
+  } = props;
+
   return (
     <div className="flex flex-col justify-center pl-8 my-3 w-2/5 gap-2">
       <div>
         <p>Сортировать расходы по:</p>
         <div className="flex items-center w-3/4 justify-between">
-          <button
-            className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-sky-200 focus:bg-sky-400"
-            onClick={() => paymentFilter("all")}
-          >
-            Все
-          </button>
-          <div className="text-md">{sum} ₽</div>
+          <div className="w-3/5">
+            <Button handleClick={() => paymentFilter("all")} title={"Все"} />
+          </div>
+          <div className="text-base">{sum} ₽</div>
         </div>
       </div>
+
       <div>
         <p>методу оплаты:</p>
         <div className="flex flex-col items-start gap-2 justify-between w-3/4">
@@ -23,14 +31,14 @@ const FilteredItems = (props) => {
               key={item.payment}
               className="flex items-center w-full justify-between"
             >
-              <button
-                key={item.payment}
-                className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-sky-200 focus:bg-sky-400"
-                onClick={() => paymentFilter(item.payment)}
-              >
-                {item.payment}
-              </button>
-              <div className="text-md">{item.cost} ₽</div>
+              <div className="w-3/5">
+                <Button
+                  key={item.payment}
+                  handleClick={() => paymentFilter(item.payment)}
+                  title={item.payment}
+                />
+              </div>
+              <div className="text-base">{item.cost} ₽</div>
             </li>
           ))}
         </div>
@@ -43,14 +51,14 @@ const FilteredItems = (props) => {
               key={item.itemCategory}
               className="flex items-center w-full justify-between"
             >
-              <button
-                key={item.itemCategory}
-                className="lg:w-3/5 shadow-md rounded-lg px-2 py-1 bg-sky-200 focus:bg-sky-400"
-                onClick={() => categoryFilter(item.itemCategory)}
-              >
-                {item.itemCategory}
-              </button>
-              <div className="text-md">{item.cost} ₽</div>
+              <div className="w-3/5">
+                <Button
+                  key={item.itemCategory}
+                  handleClick={() => categoryFilter(item.itemCategory)}
+                  title={item.itemCategory}
+                />
+              </div>
+              <div className="text-base">{item.cost} ₽</div>
             </li>
           ))}
         </div>

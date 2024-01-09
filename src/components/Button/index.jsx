@@ -1,9 +1,11 @@
+import "./styles.css";
+
 const Button = (props) => {
-  const { title, handleClick, type } = props;
+  const { title, handleClick, type, isFocus } = props;
 
   return (
     <button
-      className="h-full border border-solid rounded bg-sky-300 text-md font-semibold text-black p-2 transition-all ease-out duration-500 hover:bg-sky-400 hover:shadow-md"
+      className={isFocus ? "button focus" : "button"}
       type={type}
       onClick={(event) => handleClick(event)}
     >

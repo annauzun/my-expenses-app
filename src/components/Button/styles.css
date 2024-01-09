@@ -1,0 +1,21 @@
+.button {
+  height: 100%;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 10px;
+  background-color: rgb(125 211 252);
+  font-size: 16px;
+  color: rgb(0 0 0);
+  padding: 4px 10px;
+  transition-property: all 0.5s;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button:focus {
+  background-color: rgb(56 189 248);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}

@@ -99,7 +99,9 @@ const Form = (props) => {
             </select>
           </div>
         </div>
-        <Button title="Добавить" handleClick={handleClick} type="submit" />
+        <div className="w-1/6">
+          <Button title="Добавить" handleClick={handleClick} type="submit" />
+        </div>
         <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
       </form>
     </div>
