@@ -57,7 +57,7 @@ const IncomePage = () => {
     sum += parseInt(item.cost);
     return sum;
   });
-
+  let numberFormat = new Intl.NumberFormat()
   var paymentItems = items.reduce((acc, cur) => {
     const existType = acc.find((a) => a.payment === cur.payment);
     if (existType) {
@@ -107,7 +107,7 @@ const IncomePage = () => {
           <Chart categoryItems={categoryItems} />
         </div>
       </div>
-      <div className="mb-5 text-center text-xl">Итого доходов - {sum} ₽</div>
+      <div className="mb-5 text-center text-xl">Итого доходов - {numberFormat.format(sum)} ₽</div>
       <div className="bg-purple-300/25">
         <Form addItem={addItem} itemCategories={incCategories} />
         <div className="my-4 bg-slate-600/25">

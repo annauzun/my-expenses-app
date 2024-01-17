@@ -9,6 +9,7 @@ const COLORS = [
   "#ff7070   ",
   "#ffb525 ",
 ];
+let numberFormat = new Intl.NumberFormat()
 const Chart = ({ categoryItems }) => {
   return (
     <ResponsiveContainer width="100%" height="80%">
@@ -18,7 +19,7 @@ const Chart = ({ categoryItems }) => {
           cx="50%"
           cy="50%"
           labelLine={true}
-          label={({ itemCategory, cost }) => `${itemCategory}: ${cost} ₽`}
+          label={({ itemCategory, cost }) => `${itemCategory}: ${numberFormat.format(cost)} ₽`}
           outerRadius={75}
           fill="#8884d8"
           dataKey="cost"

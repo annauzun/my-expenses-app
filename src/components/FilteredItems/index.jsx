@@ -1,5 +1,5 @@
 import Button from "components/Button";
-
+let numberFormat = new Intl.NumberFormat()
 const FilteredItems = (props) => {
   const {
     paymentFilter,
@@ -19,7 +19,7 @@ const FilteredItems = (props) => {
           <div className="w-3/5">
             <Button handleClick={() => paymentFilter("all")} title={"Все"} />
           </div>
-          <div className="text-base">{sum} ₽</div>
+          <div className="text-base">{numberFormat.format(sum)} ₽</div>
         </div>
       </div>
 
@@ -38,7 +38,7 @@ const FilteredItems = (props) => {
                   title={item.payment}
                 />
               </div>
-              <div className="text-base">{item.cost} ₽</div>
+              <div className="text-base">{numberFormat.format(item.cost)} ₽</div>
             </li>
           ))}
         </div>
@@ -58,7 +58,7 @@ const FilteredItems = (props) => {
                   title={item.itemCategory}
                 />
               </div>
-              <div className="text-base">{item.cost} ₽</div>
+              <div className="text-base">{numberFormat.format(item.cost)} ₽</div>
             </li>
           ))}
         </div>

@@ -5,7 +5,7 @@ const Item = (props) => {
   const { item, deleteItem } = props;
   /* текущая дата
   let currentDate = new Date().toLocaleDateString();*/
-
+  let numberFormat = new Intl.NumberFormat()
   return (
     <div className="border-b-2 py-2 px-8 flex justify-between">
       <div className="flex justify-between w-full text-gray-700">
@@ -52,7 +52,7 @@ const Item = (props) => {
           </div>
         </div>
         <div className="flex flex-col items-end">
-          <p className="text-lg">{item.cost} ₽</p>
+          <p className="text-lg">{numberFormat.format(item.cost)} ₽</p>
           <button
             key={item.id}
             className="hover:underline cursor-pointer text-sm"
