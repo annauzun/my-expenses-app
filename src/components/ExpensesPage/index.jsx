@@ -7,13 +7,12 @@ import { expCategories } from "categories";
 import Loader from "components/Loader";
 import FilteredItems from "components/FilteredItems";
 
-
 let numberFormat = new Intl.NumberFormat();
 
 const ExpensesPage = () => {
   const [items, setItems] = useState([]);
   const [filtered, setFiltered] = useState(items);
-  
+
   useEffect(() => {
     setFiltered(items);
   }, [items]);
@@ -63,7 +62,6 @@ const ExpensesPage = () => {
 
   var paymentItems = items.reduce((acc, cur) => {
     const existType = acc.find((a) => a.payment === cur.payment);
-
     if (existType) {
       existType.cost += +cur.cost;
       return acc;
@@ -78,7 +76,6 @@ const ExpensesPage = () => {
 
   var categoryItems = items.reduce((acc, cur) => {
     const existType = acc.find((a) => a.itemCategory === cur.itemCategory);
-    console.log(existType);
     if (existType) {
       existType.cost += +cur.cost;
       return acc;

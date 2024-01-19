@@ -57,6 +57,8 @@ const ReportsPage = () => {
     return sumInc;
   });
 
+  /*let sumDif = sumInc - sumExp*/
+
   return (
     <div className="flex flex-col">
       <div className="flex my-10">
@@ -107,14 +109,17 @@ const ReportsPage = () => {
             {filteredItemsInc.length === 0 && (
               <p>
                 В текущем месяце нет доходов по выбранным критериям. Выберите
-                другие критерии для сформирования нового отчета
+                другие критерии для формирования нового отчета
               </p>
             )}
             {filteredItemsInc.length > 0 &&
               filteredItemsInc.map((item) => {
                 return (
                   <div className="border-b-2 py-2 px-8 flex justify-between">
-                    <div className="flex justify-between w-full text-gray-700" key={item}>
+                    <div
+                      className="flex justify-between w-full text-gray-700"
+                      key={item}
+                    >
                       <div className="flex flex-col items-start">
                         <div className="text-sm rounded-xl px-2">
                           {format(new Date(item.date), "dd MMMM y", {
@@ -134,7 +139,7 @@ const ReportsPage = () => {
                 );
               })}
             <div className="my-4 text-center text-xl">
-              Итого за период - {numberFormat.format(sumInc)} ₽
+              Итого за период: {numberFormat.format(sumInc)} ₽
             </div>
           </div>
         </div>
@@ -185,13 +190,16 @@ const ReportsPage = () => {
             {filteredItemsExp.length === 0 && (
               <p>
                 В текущем месяце нет расходов по выбранным критериям. Выберите
-                другие критерии для сформирования нового отчета
+                другие критерии для формирования нового отчета
               </p>
             )}
             {filteredItemsExp.length > 0 &&
               filteredItemsExp.map((item) => {
                 return (
-                  <div className="border-b-2 py-2 px-8 flex justify-between"  key={item}>
+                  <div
+                    className="border-b-2 py-2 px-8 flex justify-between"
+                    key={item}
+                  >
                     <div className="flex justify-between w-full text-gray-700">
                       <div className="flex flex-col items-start">
                         <div className="text-sm rounded-xl px-2">
@@ -213,16 +221,19 @@ const ReportsPage = () => {
               })}
           </div>
           <div className="my-4 text-center text-xl">
-            Итого за период - {numberFormat.format(sumExp)} ₽
+            Итого за период: {numberFormat.format(sumExp)} ₽
           </div>
         </div>
       </div>
+      {/*<div className="text-center text-2xl my-4">
+            Баланс: {numberFormat.format(sumDif)} ₽
+            </div>*/}
     </div>
   );
 };
 
 export default ReportsPage;
-/*в фильтры добавить категорию all
-  баланс
+/*
+  
   фильтрует только по январю - исправить
   ReportPage разбить на компоненты*/

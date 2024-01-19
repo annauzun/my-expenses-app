@@ -9,7 +9,7 @@ const FilteredItems = (props) => {
   return (
     <div className="flex flex-col justify-center pl-8 my-3 w-2/5 gap-2">
       <div>
-        <p>Сортировать расходы по:</p>
+        <p>Сортировать по:</p>
         <div className="flex items-center w-3/4 justify-between">
           <div className="w-3/5">
             <Button handleClick={() => paymentFilter("all")} title={"Все"} />
