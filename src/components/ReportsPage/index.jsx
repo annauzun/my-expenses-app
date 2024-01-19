@@ -26,7 +26,7 @@ const ReportsPage = () => {
   const filterExp = () => {
     let filtArr = [...itemsExp]
       .filter((item) => item.itemCategory === expCategory)
-      .filter((item) => item.payment == payment)
+      .filter((item) => item.payment === payment)
       .filter((item) => new Date(item.date).getMonth() === month.id);
     setFilteredItemsExp(filtArr);
   };
@@ -46,8 +46,8 @@ const ReportsPage = () => {
   const filterInc = () => {
     let filtArr = [...itemsInc]
       .filter((item) => item.itemCategory === incCategory)
-      .filter((item) => item.payment == payment)
-      .filter((item) => new Date(item.date).getMonth() == month.id);
+      .filter((item) => item.payment === payment)
+      .filter((item) => new Date(item.date).getMonth() === month.id);
     setFilteredItemsInc(filtArr);
   };
 

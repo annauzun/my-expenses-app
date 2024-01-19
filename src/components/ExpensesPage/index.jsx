@@ -3,7 +3,7 @@ import Item from "components/Item";
 import { useState, useEffect } from "react";
 import Chart from "components/Chart";
 import Empty from "components/Empty";
-import { expCategories, payments } from "categories";
+import { expCategories } from "categories";
 import Loader from "components/Loader";
 import FilteredItems from "components/FilteredItems";
 
