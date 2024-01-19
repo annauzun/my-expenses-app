@@ -7,6 +7,8 @@ import Chart from "components/Chart";
 import FilteredItems from "components/FilteredItems";
 import Loader from "components/Loader";
 
+let numberFormat = new Intl.NumberFormat();
+
 const IncomePage = () => {
   const [items, setItems] = useState([]);
   const [filtered, setFiltered] = useState(items);
@@ -57,7 +59,7 @@ const IncomePage = () => {
     sum += parseInt(item.cost);
     return sum;
   });
-  let numberFormat = new Intl.NumberFormat()
+
   var paymentItems = items.reduce((acc, cur) => {
     const existType = acc.find((a) => a.payment === cur.payment);
     if (existType) {
@@ -107,8 +109,10 @@ const IncomePage = () => {
           <Chart categoryItems={categoryItems} />
         </div>
       </div>
-      <div className="mb-5 text-center text-xl">Итого доходов - {numberFormat.format(sum)} ₽</div>
-      <div className="bg-purple-300/25">
+      <div className="mb-5 text-center text-xl">
+        Итого доходов - {numberFormat.format(sum)} ₽
+      </div>
+      <div className="bg-purple-100">
         <Form addItem={addItem} itemCategories={incCategories} />
         <div className="my-4 bg-slate-600/25">
           {filtered.length === 0 && (
@@ -116,14 +120,7 @@ const IncomePage = () => {
           )}
           {filtered.length > 0 &&
             filtered.map((item) => {
-              return (
-                <Item
-                  key={item.id}
-                  item={item}
-                  addItem={addItem}
-                  deleteItem={deleteItem}
-                />
-              );
+              return <Item key={item.id} item={item} deleteItem={deleteItem} />;
             })}
         </div>
       </div>

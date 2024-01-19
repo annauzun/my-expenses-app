@@ -1,15 +1,10 @@
 import Button from "components/Button";
-let numberFormat = new Intl.NumberFormat()
+
+let numberFormat = new Intl.NumberFormat();
+
 const FilteredItems = (props) => {
-  const {
-    paymentFilter,
-    paymentItems,
-    categoryFilter,
-    categoryItems,
-    dateItems,
-    dateFilter,
-    sum,
-  } = props;
+  const { paymentFilter, paymentItems, categoryFilter, categoryItems, sum } =
+    props;
 
   return (
     <div className="flex flex-col justify-center pl-8 my-3 w-2/5 gap-2">
@@ -38,7 +33,9 @@ const FilteredItems = (props) => {
                   title={item.payment}
                 />
               </div>
-              <div className="text-base">{numberFormat.format(item.cost)} ₽</div>
+              <div className="text-base">
+                {numberFormat.format(item.cost)} ₽
+              </div>
             </li>
           ))}
         </div>
@@ -58,7 +55,9 @@ const FilteredItems = (props) => {
                   title={item.itemCategory}
                 />
               </div>
-              <div className="text-base">{numberFormat.format(item.cost)} ₽</div>
+              <div className="text-base">
+                {numberFormat.format(item.cost)} ₽
+              </div>
             </li>
           ))}
         </div>

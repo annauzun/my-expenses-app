@@ -3,17 +3,17 @@ import Item from "components/Item";
 import { useState, useEffect } from "react";
 import Chart from "components/Chart";
 import Empty from "components/Empty";
-import { expCategories, months } from "categories";
+import { expCategories, payments } from "categories";
 import Loader from "components/Loader";
 import FilteredItems from "components/FilteredItems";
-import { getMonth } from "date-fns";
-import { format } from "date-fns";
-import { ru } from "date-fns/locale";
+
+
+let numberFormat = new Intl.NumberFormat();
 
 const ExpensesPage = () => {
   const [items, setItems] = useState([]);
   const [filtered, setFiltered] = useState(items);
-
+  
   useEffect(() => {
     setFiltered(items);
   }, [items]);
@@ -44,15 +44,6 @@ const ExpensesPage = () => {
     }
   };
 
-  const dateFilter = (date) => {
-    if (date === "all") {
-      setFiltered(items);
-    } else {
-      let newItems = [...items].filter((item) => item.date === date);
-      setFiltered(newItems);
-    }
-  };
-
   const categoryFilter = (itemCategory) => {
     if (itemCategory === "all") {
       setFiltered(items);
@@ -70,7 +61,6 @@ const ExpensesPage = () => {
     return sum;
   });
 
-  let numberFormat = new Intl.NumberFormat()
   var paymentItems = items.reduce((acc, cur) => {
     const existType = acc.find((a) => a.payment === cur.payment);
 
@@ -86,22 +76,6 @@ const ExpensesPage = () => {
     return acc;
   }, []);
 
-  var dateItems = items.reduce((acc, cur) => {
-    const existType = acc.find((a) => a.x === cur.x);
-    console.log(existType);
-    if (existType) {
-      existType.cost += +cur.cost;
-      return acc;
-    }
-
-    acc.push({
-      month: cur.date,
-      cost: +cur.cost,
-    });
-    return acc;
-  }, []);
-  console.log(dateItems);
-
   var categoryItems = items.reduce((acc, cur) => {
     const existType = acc.find((a) => a.itemCategory === cur.itemCategory);
     console.log(existType);
@@ -116,7 +90,7 @@ const ExpensesPage = () => {
     });
     return acc;
   }, []);
-  console.log(categoryItems);
+
   if (items.length === 0)
     return (
       <div className="mt-20 text-center">
@@ -132,15 +106,15 @@ const ExpensesPage = () => {
           paymentItems={paymentItems}
           categoryFilter={categoryFilter}
           categoryItems={categoryItems}
-          dateFilter={dateFilter}
-          dateItems={dateItems}
           sum={sum}
         />
         <div className="w-3/5">
           <Chart categoryItems={categoryItems} />
         </div>
       </div>
-      <div className="mb-5 text-center text-xl">Итого расходов - {numberFormat.format(sum)} ₽</div>
+      <div className="mb-5 text-center text-xl">
+        Итого расходов - {numberFormat.format(sum)} ₽
+      </div>
       <div className="bg-green-100">
         <Form addItem={addItem} itemCategories={expCategories} />
         <div className="my-4 bg-slate-400/25">
@@ -149,14 +123,7 @@ const ExpensesPage = () => {
           )}
           {filtered.length > 0 &&
             filtered.map((item) => {
-              return (
-                <Item
-                  key={item.id}
-                  item={item}
-                  addItem={addItem}
-                  deleteItem={deleteItem}
-                />
-              );
+              return <Item key={item.id} item={item} deleteItem={deleteItem} />;
             })}
         </div>
       </div>

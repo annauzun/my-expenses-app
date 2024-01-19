@@ -1,11 +1,13 @@
 import { format } from "date-fns";
 import { ru } from "date-fns/locale";
 
+let numberFormat = new Intl.NumberFormat();
+
 const Item = (props) => {
   const { item, deleteItem } = props;
   /* текущая дата
   let currentDate = new Date().toLocaleDateString();*/
-  let numberFormat = new Intl.NumberFormat()
+
   return (
     <div className="border-b-2 py-2 px-8 flex justify-between">
       <div className="flex justify-between w-full text-gray-700">
