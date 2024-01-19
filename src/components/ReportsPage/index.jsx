@@ -24,15 +24,17 @@ const ReportsPage = () => {
   }, []);
 
   const filterExp = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     let filtArr = [...itemsExp]
       .filter((item) => item.itemCategory === expCategory)
       .filter((item) => item.payment === payment)
-      .filter((item) => format(new Date(item.date), "LLLL", {
-        locale: ru,
-      }) === selectedMonth);
+      .filter(
+        (item) =>
+          format(new Date(item.date), "LLLL", {
+            locale: ru,
+          }) === selectedMonth,
+      );
     setFilteredItemsExp(filtArr);
-    
   };
 
   let sumExp = 0;
@@ -51,9 +53,12 @@ const ReportsPage = () => {
     let filtArr = [...itemsInc]
       .filter((item) => item.itemCategory === incCategory)
       .filter((item) => item.payment === payment)
-      .filter((item) => format(new Date(item.date), "LLLL", {
-        locale: ru,
-      }) === selectedMonth);
+      .filter(
+        (item) =>
+          format(new Date(item.date), "LLLL", {
+            locale: ru,
+          }) === selectedMonth,
+      );
     setFilteredItemsInc(filtArr);
   };
 
@@ -62,7 +67,7 @@ const ReportsPage = () => {
     sumInc += parseInt(item.cost);
     return sumInc;
   });
-console.log(selectedMonth)
+  console.log(selectedMonth);
   /*let sumDif = sumInc - sumExp*/
 
   return (
@@ -156,7 +161,9 @@ console.log(selectedMonth)
             {
               <select
                 value={selectedMonth}
-                onChange={(event) => setSelectedMonth(event.target.value.toLowerCase())}
+                onChange={(event) =>
+                  setSelectedMonth(event.target.value.toLowerCase())
+                }
                 className="select"
               >
                 {months.map((month) => {
