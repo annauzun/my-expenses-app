@@ -11,7 +11,7 @@ const ReportsPage = () => {
   const [payment, setPayment] = useState(payments[0]);
   const [expCategory, setExpCategory] = useState(expCategories[0]);
   const [incCategory, setIncCategory] = useState(incCategories[0]);
-  const [month, setMonth] = useState(months[0]);
+  const [selectedMonth, setSelectedMonth] = useState(null);
   const [itemsExp, setItemsExp] = useState([]);
   const [itemsInc, setItemsInc] = useState([]);
   const [filteredItemsExp, setFilteredItemsExp] = useState([]);
@@ -23,12 +23,16 @@ const ReportsPage = () => {
       .then((data) => setItemsExp(data));
   }, []);
 
-  const filterExp = () => {
+  const filterExp = (event) => {
+    event.preventDefault()
     let filtArr = [...itemsExp]
       .filter((item) => item.itemCategory === expCategory)
       .filter((item) => item.payment === payment)
-      .filter((item) => new Date(item.date).getMonth() === month.id);
+      .filter((item) => format(new Date(item.date), "LLLL", {
+        locale: ru,
+      }) === selectedMonth);
     setFilteredItemsExp(filtArr);
+    
   };
 
   let sumExp = 0;
@@ -47,7 +51,9 @@ const ReportsPage = () => {
     let filtArr = [...itemsInc]
       .filter((item) => item.itemCategory === incCategory)
       .filter((item) => item.payment === payment)
-      .filter((item) => new Date(item.date).getMonth() === month.id);
+      .filter((item) => format(new Date(item.date), "LLLL", {
+        locale: ru,
+      }) === selectedMonth);
     setFilteredItemsInc(filtArr);
   };
 
@@ -56,7 +62,7 @@ const ReportsPage = () => {
     sumInc += parseInt(item.cost);
     return sumInc;
   });
-
+console.log(selectedMonth)
   /*let sumDif = sumInc - sumExp*/
 
   return (
@@ -68,8 +74,8 @@ const ReportsPage = () => {
             <label>Месяц</label>
             {
               <select
-                value={month.id}
-                onChange={(event) => setMonth(event.target.value)}
+                value={selectedMonth}
+                onChange={(event) => setSelectedMonth(event.target.value)}
                 className="select"
               >
                 {months.map((month) => {
@@ -149,8 +155,8 @@ const ReportsPage = () => {
             <label>Месяц</label>
             {
               <select
-                value={month.id}
-                onChange={(event) => setMonth(event.target.value)}
+                value={selectedMonth}
+                onChange={(event) => setSelectedMonth(event.target.value.toLowerCase())}
                 className="select"
               >
                 {months.map((month) => {
@@ -233,7 +239,3 @@ const ReportsPage = () => {
 };
 
 export default ReportsPage;
-/*
-  
-  фильтрует только по январю - исправить
-  ReportPage разбить на компоненты*/
