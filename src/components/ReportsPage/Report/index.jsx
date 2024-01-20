@@ -1,4 +1,4 @@
-import { payments, expCategories, months } from "categories";
+import { payments, months } from "categories";
 import Button from "components/Button";
 import { useState, useEffect } from "react";
 import "components/ReportsPage/styles.css";
@@ -7,37 +7,37 @@ import { ru } from "date-fns/locale";
 
 let numberFormat = new Intl.NumberFormat();
 
-const ExpReport = () => {
-  const [paymentExp, setPaymentExp] = useState([]);
-  const [expCategory, setExpCategory] = useState([]);
-  const [selectedMonthExp, setSelectedMonthExp] = useState(null);
-  const [itemsExp, setItemsExp] = useState([]);
-  const [filteredItemsExp, setFilteredItemsExp] = useState([]);
+const Report = ({itemCategories, url}) => {
+  const [payment, setPayment] = useState([]);
+  const [selectedMonth, setSelectedMonth] = useState(null);
+  const [category, setCategory] = useState([])
+  const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
 
   useEffect(() => {
-    fetch("https://657636a50febac18d403c5b7.mockapi.io/items")
+    fetch(url)
       .then((response) => response.json())
-      .then((data) => setItemsExp(data));
+      .then((data) => setItems(data));
   }, []);
 
   const filterExp = (event) => {
     event.preventDefault();
-    let filtArr = [...itemsExp]
-      .filter((item) => item.itemCategory === expCategory)
-      .filter((item) => item.payment === paymentExp)
+    let filtArr = [...items]
+      .filter((item) => item.itemCategory === category)
+      .filter((item) => item.payment === payment)
       .filter(
         (item) =>
           format(new Date(item.date), "LLLL", {
             locale: ru,
-          }) === selectedMonthExp,
+          }) === selectedMonth,
       );
-    setFilteredItemsExp(filtArr);
+    setFilteredItems(filtArr);
   };
 
-  let sumExp = 0;
-  filteredItemsExp.forEach(function (item) {
-    sumExp += parseInt(item.cost);
-    return sumExp;
+  let sum = 0;
+  filteredItems.forEach(function (item) {
+    sum += parseInt(item.cost);
+    return sum;
   });
 
 
@@ -47,9 +47,9 @@ const ExpReport = () => {
             <label>Месяц</label>
             {
               <select
-                value={selectedMonthExp}
+                value={selectedMonth}
                 onChange={(event) =>
-                  setSelectedMonthExp(event.target.value.toLowerCase())
+                  setSelectedMonth(event.target.value.toLowerCase())
                 }
                 className="select"
               >
@@ -63,12 +63,12 @@ const ExpReport = () => {
           <div className="label">
             <label>Категория</label>
             <select
-              value={expCategory}
-              onChange={(event) => setExpCategory(event.target.value)}
+              value={category}
+              onChange={(event) => setCategory(event.target.value)}
               className="select"
             >
               <option>--Выберите категорию--</option>
-              {expCategories.map((category) => {
+              {itemCategories.map((category) => {
                 return <option key={category}>{category}</option>;
               })}
             </select>
@@ -76,8 +76,8 @@ const ExpReport = () => {
           <div className="label">
             <label>Оплата</label>
             <select
-              value={paymentExp}
-              onChange={(event) => setPaymentExp(event.target.value)}
+              value={payment}
+              onChange={(event) => setPayment(event.target.value)}
               className="select"
             >
               <option>--Выберите способ оплаты--</option>
@@ -90,14 +90,13 @@ const ExpReport = () => {
             <Button title={"Отчет"} handleClick={filterExp} />
           </div>
           <div>
-            {filteredItemsExp.length === 0 && (
+            {filteredItems.length === 0 && (
               <p>
-                В текущем месяце нет расходов по выбранным критериям. Выберите
-                другие критерии для формирования нового отчета
+                Выберите критерии для формирования отчета
               </p>
             )}
-            {filteredItemsExp.length > 0 &&
-              filteredItemsExp.map((item) => {
+            {filteredItems.length > 0 &&
+              filteredItems.map((item) => {
                 return (
                   <div
                     className="border-b-2 py-2 px-8 flex justify-between"
@@ -124,10 +123,10 @@ const ExpReport = () => {
               })}
           </div>
           <div className="my-4 text-center text-xl">
-            Итого за период: {numberFormat.format(sumExp)} ₽
+            Итого за период: {numberFormat.format(sum)} ₽
           </div>
         </>
   );
 };
 
-export default ExpReport;
+export default Report;
