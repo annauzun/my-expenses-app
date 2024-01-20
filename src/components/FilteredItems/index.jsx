@@ -1,11 +1,10 @@
 import Button from "components/Button";
 
-
 let numberFormat = new Intl.NumberFormat();
 
 const FilteredItems = (props) => {
-
-  const { paymentFilter, paymentItems, categoryFilter, categoryItems, sum } = props
+  const { paymentFilter, paymentItems, categoryFilter, categoryItems, sum } =
+    props;
 
   return (
     <div className="flex flex-col justify-center pl-8 my-3 w-2/5 gap-2">
